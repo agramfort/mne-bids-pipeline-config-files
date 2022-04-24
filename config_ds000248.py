@@ -7,7 +7,7 @@ study_name = 'ds000248'
 bids_root = f'/storage/store/data/{study_name}'
 deriv_root = f'/storage/store2/derivatives/{study_name}/mne-bids-pipeline/'
 subjects_dir = f'{bids_root}/derivatives/freesurfer/subjects'
-N_JOBS = 2
+N_JOBS = 1
 
 subjects = ['01']
 rename_events = {'Smiley': 'Emoji',
@@ -41,10 +41,12 @@ n_proj_ecg = dict(n_mag=1, n_grad=1, n_eeg=0)
 ecg_proj_from_average = True
 eog_proj_from_average = False
 
-bem_mri_images = 'FLASH'
-recreate_bem = True
-recreate_scalp_surface = True
+# bem_mri_images = 'FLASH'
+# recreate_bem = True
+# recreate_scalp_surface = True
 
 def mri_t1_path_generator(bids_path):
     # don't really do any modifications – just for testing!
     return bids_path
+
+on_error = "debug"

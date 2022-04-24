@@ -3,7 +3,11 @@ import shutil
 import importlib
 import os
 
+import coloredlogs
+import logging
 from mako.template import Template
+
+logger = logging.getLogger(__name__)
 
 reports_folder = Path(__file__).parent / 'reports'
 reports_folder.mkdir(exist_ok=True)
@@ -13,10 +17,10 @@ datasets = [
     "ds000246",
     "ds000247",
     "ds000248",
-    "ds001810",
-    "ds001971",
-    # "ds003104",
-    # "ds003392",
+    # "ds001810",
+    # "ds001971",
+    "ds003104",
+    "ds003392",
     "ds004107",
 ]
 
@@ -25,7 +29,7 @@ def copy_datasets_reports():
     for dataset in datasets:
         config = importlib.import_module(f"config_{dataset}")
         deriv_root = Path(config.deriv_root)
-        print(deriv_root)
+        print("Processing: ", deriv_root)
         report_fnames = list(deriv_root.rglob("**/*.html"))
         if report_fnames:
             dataset_folder = reports_folder / dataset
@@ -33,11 +37,13 @@ def copy_datasets_reports():
         else:
             continue
         for fname in report_fnames:
-            print(fname)
             fsize = fname.stat().st_size / 1e6  # size in MB
-            print(f"Size: {fsize / fsize:.2f} MB")
-            if fsize < 20:
+            fname_relative = fname.relative_to(deriv_root)
+            if fsize < 30:
+                logger.info(f"Copying: {fname_relative}")
                 shutil.copy(fname, dataset_folder / fname.name)
+            else:
+                logger.warning(f"File to big ({fsize:.2f}): {fname_relative}")
 
 
 def build_index():
