@@ -32,6 +32,9 @@ spatial_filter = 'ssp'
 h_freq = 110
 l_freq = None
 
+report_evoked_n_time_points = 3
+report_stc_n_time_points = 3
+
 task = "auditory"
 if "MNE_BIDS_STUDY_TASK" in os.environ:
     task = os.environ['MNE_BIDS_STUDY_TASK']
@@ -93,6 +96,9 @@ def get_t1_from_meeg(bids_path):
 
 
 mri_t1_path_generator = get_t1_from_meeg
+
+report_evoked_n_time_points = 3
+report_stc_n_time_points = 3
 
 # Exclude for source space analysis as no good MRI
 # exclude_subjects = []

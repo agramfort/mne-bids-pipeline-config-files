@@ -45,6 +45,10 @@ eog_proj_from_average = False
 # recreate_bem = True
 # recreate_scalp_surface = True
 
+report_evoked_n_time_points = 3
+report_stc_n_time_points = 3
+
+
 def mri_t1_path_generator(bids_path):
     # don't really do any modifications – just for testing!
     return bids_path
