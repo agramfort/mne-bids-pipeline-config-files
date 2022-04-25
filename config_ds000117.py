@@ -2,18 +2,19 @@
 Faces dataset
 """
 
-from pathlib import Path
-import os.path as op
-
 study_name = 'ds000117'
-bids_root = Path(f'/storage/store2/data/{study_name}')
-deriv_root = Path(f'/storage/store2/derivatives/{study_name}/mne-bids-pipeline/')
+bids_root = f'/storage/store2/data/{study_name}'
+deriv_root = f'/storage/store2/derivatives/{study_name}/mne-bids-pipeline/'
 subjects_dir = f'{bids_root}/derivatives/freesurfer/subjects'
+
+# subjects = "all"
 
 task = 'facerecognition'
 # ch_types = ['eeg']
 ch_types = ['meg']
 data_type = 'meg'
+
+eog_channels = ['EEG062']
 
 # deriv_root = Path('/storage/store2/data/ds000117/derivatives/mne-bids-pipeline-eeg')
 # if 'meg' in ch_types:
@@ -37,8 +38,8 @@ if 'meg' in ch_types:
     use_maxwell_filter = True
     find_noisy_channels_meg = True
     mf_st_duration = 10.0  # 10 seconds with tSSS
-    mf_cal_fname = bids_root / 'sss_cal.dat'
-    mf_ctc_fname = bids_root / 'ct_sparse.fif'
+    mf_cal_fname = bids_root + '/derivatives/meg_derivatives/sss_cal.dat'
+    mf_ctc_fname = bids_root + '/derivatives/meg_derivatives/ct_sparse.fif'
     # mf_head_origin = 'auto'
     mf_head_origin = [0.003, 0.009, 0.04]
 
@@ -83,5 +84,5 @@ def mri_t1_path_generator(bids_path):
 #######################
 # Global
 on_error = 'debug'
-N_JOBS = 16
-# N_JOBS = 1
+N_JOBS = len(subjects)
+N_JOBS = 1

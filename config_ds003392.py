@@ -1,13 +1,20 @@
 """
 hMT+ Localizer
 """
+from mne_bids import get_entity_vals
+
 study_name = 'ds003392'
 bids_root = f'/storage/store2/data/{study_name}'
 deriv_root = f'/storage/store2/derivatives/{study_name}/mne-bids-pipeline/'
 subjects_dir = f'{bids_root}/derivatives/freesurfer/subjects'
 
-subjects = "all"
+# subjects = "all"
+subjects = sorted(get_entity_vals(bids_root, entity_key='subject'))
+# exclude_subjects = ["06"]  # projs were applied during acquisition...
+# subjects = sorted(list(set(subjects) - set(exclude_subjects)))
 # subjects = ['01']
+N_JOBS = len(subjects)
+# N_JOBS = 1
 
 task = 'localizer'
 find_flat_channels_meg = True
@@ -41,3 +48,5 @@ contrasts = [('incoherent', 'coherent')]
 # Noise estimation
 process_er = True
 noise_cov = 'emptyroom'
+
+on_error = "debug"
