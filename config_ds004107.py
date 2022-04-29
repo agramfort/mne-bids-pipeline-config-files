@@ -14,8 +14,6 @@ subjects = sorted(get_entity_vals(bids_root, entity_key='subject'))
 # subjects = ['mind002']
 # subjects = ['mind005']
 
-# subjects_dir = '/storage/store/work/agramfor/MIND/subjects/'
-
 ch_types = ['meg']
 find_flat_channels_meg = False
 find_noisy_channels_meg = False
@@ -36,7 +34,7 @@ report_evoked_n_time_points = 3
 report_stc_n_time_points = 3
 
 task = "auditory"
-if "MNE_BIDS_STUDY_TASK" in os.environ:
+if "MNE_BIDS_STUDY_TASK" in os.environ and os.environ['MNE_BIDS_STUDY_TASK']:
     task = os.environ['MNE_BIDS_STUDY_TASK']
 
 

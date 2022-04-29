@@ -22,7 +22,10 @@ datasets = [
     "ds003104",
     "ds003392",
     "ds004107",
+    "erpcore",
 ]
+
+REPORT_SIZE_LIMIT = 35  # MB
 
 
 def copy_datasets_reports():
@@ -39,7 +42,9 @@ def copy_datasets_reports():
         for fname in report_fnames:
             fsize = fname.stat().st_size / 1e6  # size in MB
             fname_relative = fname.relative_to(deriv_root)
-            if fsize < 30:
+            if "proc-ica" in str(fname_relative):
+                continue  # skip ICA reports
+            if fsize < REPORT_SIZE_LIMIT:
                 logger.info(f"Copying: {fname_relative}")
                 shutil.copy(fname, dataset_folder / fname.name)
             else:

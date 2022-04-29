@@ -73,8 +73,6 @@ random_state = 42
 
 #######################
 # Source imaging
-# subjects_dir = op.join(bids_root, 'derivatives', 'freesurfer', 'subjects')
-# subjects_dir = op.join(bids_root, 'derivatives_fs', 'freesurfer', 'subjects')
 # recreate_bem = True
 
 def mri_t1_path_generator(bids_path):
@@ -85,4 +83,7 @@ def mri_t1_path_generator(bids_path):
 # Global
 on_error = 'debug'
 N_JOBS = len(subjects)
-N_JOBS = 1
+# N_JOBS = 1
+
+report_evoked_n_time_points = 10
+report_stc_n_time_points = 10
