@@ -16,13 +16,11 @@ data_type = 'meg'
 
 eog_channels = ['EEG062']
 
-# deriv_root = Path('/storage/store2/data/ds000117/derivatives/mne-bids-pipeline-eeg')
-# if 'meg' in ch_types:
-#     deriv_root = Path('/storage/store2/data/ds000117/derivatives/mne-bids-pipeline')
+if 'eeg' in ch_types:
+    deriv_root = deriv_root.replace("mne-bids-pipeline",
+                                    "mne-bids-pipeline-eeg")
 
-# ch_types = ['meg']
 runs = ['01', '02', '03', '04', '05', '06']
-# runs = ['01']
 sessions = ['meg']
 interactive = False
 acq = None
@@ -75,9 +73,11 @@ random_state = 42
 # Source imaging
 # recreate_bem = True
 
+
 def mri_t1_path_generator(bids_path):
     bids_path.session = 'mri'
     return bids_path
+
 
 #######################
 # Global
