@@ -1,3 +1,6 @@
 reports
 .vscode/
 wip
+__pycache__
+*.prof
+
